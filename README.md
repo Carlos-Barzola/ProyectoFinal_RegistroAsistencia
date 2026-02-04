@@ -1,61 +1,56 @@
 # Kadetes Jumper | Asistencia (PHP + MySQL)
 
-Aplicación web responsive para registrar, editar y consultar asistencia de estudiantes por curso, con roles **Admin** y **Maestro**.
+Aplicación web responsive para el registro, edición y consulta de asistencia de estudiantes por curso, desarrollada en **PHP + MySQL**, con roles **Administrador** y **Maestro**.
 
-## ✅ Requisitos
+---
 
-- XAMPP (Apache + MySQL)
-- Navegador (Chrome/Edge)
-- phpMyAdmin
+## 🌐 Enlaces de acceso (Producción)
 
-## 📌 Instalación y ejecución (local)
+- **Frontend (Netlify):**  
+  👉 https://web-jumper.netlify.app/
 
-1. Copia el proyecto en:
-   `C:\xampp\htdocs\jumper`
+- **Backend / Aplicación (Render):**  
+  👉 https://proyectofinal-registroasistencia.onrender.com/?page=login
 
-2. Inicia **Apache** y **MySQL** desde XAMPP.
+> La aplicación es accesible desde cualquier navegador web sin configuración adicional.
 
-3. Importa la base de datos:
-   - Abre `http://localhost/phpmyadmin`
-   - Crea la BD: `jumper_asistencia`
-   - Entra a la BD → **Importar**
-   - Selecciona: `database/database.sql` → Continuar
+---
 
-4. Configura conexión (si aplica):
-   - Archivo: `app/config/config.php`
-   - Verifica:
-     - DB_HOST = localhost
-     - DB_NAME = jumper_asistencia
-     - DB_USER = root
-     - DB_PASS = (vacío por defecto en XAMPP)
+## ⚙️ Tecnologías utilizadas
+- PHP 8
+- MySQL (Base de datos en la nube)
+- HTML, CSS, JavaScript
+- Render (Backend)
+- Netlify (Frontend)
+- GitHub (Control de versiones)
 
-5. Abre la app:
+---
+
+## 📌 Instalación local (opcional)
+1. Clonar el repositorio.
+2. Copiar el proyecto en `C:\xampp\htdocs\`.
+3. Importar la base de datos desde `database/database.sql`.
+4. Configurar credenciales en `app/config/config.php`.
+5. Acceder desde:  
    `http://localhost/jumper/public/`
 
-## 👤 Accesos de prueba
+---
 
-> Estos datos pueden variar según tu base importada.
-
-- Admin:
-  - correo: `admin@jumper.com`
-  - clave: `Jumper123*`
-
-## ✨ Funcionalidades
-
-- Login por correo y contraseña
-- Roles: Administrador / Maestro
-- Admin:
+## 👤 Roles del sistema
+- **Administrador**
   - Crear cursos
   - Crear usuarios (maestros)
-  - Eliminar (desactivar) cursos y maestros
-- Maestro:
+  - Eliminar cursos y usuarios
+
+- **Maestro**
   - Crear estudiantes
   - Registrar asistencia por fecha
   - Editar asistencia
   - Consultar asistencia
-  - Descargar reporte en PDF (si aplica)
+  - Descargar reportes (PDF)
+
+---
 
 ## 🗄️ Base de datos
+El script completo de la base de datos (estructura + datos) se encuentra en:
 
-El script completo (estructura + datos) está en:
-`database/jumper_asistencia.sql`
