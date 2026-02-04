@@ -1,7 +1,11 @@
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS=0;
+SET sql_mode='';
+
 CREATE TABLE roles (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(20) NOT NULL UNIQUE
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO roles (nombre) VALUES ('admin'), ('maestro');
 
@@ -10,7 +14,7 @@ CREATE TABLE cursos (
   nombre VARCHAR(80) NOT NULL UNIQUE,
   activo TINYINT(1) NOT NULL DEFAULT 1,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE usuarios (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -24,7 +28,7 @@ CREATE TABLE usuarios (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (rol_id) REFERENCES roles(id),
   FOREIGN KEY (curso_id) REFERENCES cursos(id)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE estudiantes (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -38,10 +42,20 @@ CREATE TABLE estudiantes (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (curso_id) REFERENCES cursos(id),
   FOREIGN KEY (creado_por_usuario_id) REFERENCES usuarios(id)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE asistencias (
   id INT AUTO_INCREMENT PRIMARY KEY,
   estudiante_id INT NOT NULL,
   curso_id INT NOT NULL,
   fecha DATE NOT NULL,
+  presente TINYINT(1) NOT NULL DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  UNIQUE KEY uk_asistencia (estudiante_id, fecha),
+  FOREIGN KEY (estudiante_id) REFERENCES estudiantes(id),
+  FOREIGN KEY (curso_id) REFERENCES cursos(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+SET FOREIGN_KEY_CHECKS=1;
