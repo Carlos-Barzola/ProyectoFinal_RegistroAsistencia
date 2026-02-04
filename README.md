@@ -7,7 +7,7 @@ Aplicación web responsive para el registro, edición y consulta de asistencia d
 ## 🌐 Enlaces de acceso (Producción)
 
 - **Frontend (Netlify):**  
-  👉 https://web-jumper.netlify.app/
+  👉 https://asistencia-kadetes-jumper.netlify.app/
 
 - **Backend / Aplicación (Render):**  
   👉 https://proyectofinal-registroasistencia.onrender.com/?page=login
