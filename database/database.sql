@@ -1,0 +1,47 @@
+CREATE TABLE roles (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(20) NOT NULL UNIQUE
+);
+
+INSERT INTO roles (nombre) VALUES ('admin'), ('maestro');
+
+CREATE TABLE cursos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(80) NOT NULL UNIQUE,
+  activo TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE usuarios (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  rol_id INT NOT NULL,
+  nombre VARCHAR(60) NOT NULL,
+  apellido VARCHAR(60) NOT NULL,
+  correo VARCHAR(120) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  curso_id INT NULL,
+  activo TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (rol_id) REFERENCES roles(id),
+  FOREIGN KEY (curso_id) REFERENCES cursos(id)
+);
+
+CREATE TABLE estudiantes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  curso_id INT NOT NULL,
+  creado_por_usuario_id INT NOT NULL,
+  nombres VARCHAR(80) NOT NULL,
+  apellidos VARCHAR(80) NOT NULL,
+  edad INT NOT NULL,
+  celular VARCHAR(20) NULL,
+  activo TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (curso_id) REFERENCES cursos(id),
+  FOREIGN KEY (creado_por_usuario_id) REFERENCES usuarios(id)
+);
+
+CREATE TABLE asistencias (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  estudiante_id INT NOT NULL,
+  curso_id INT NOT NULL,
+  fecha DATE NOT NULL,
