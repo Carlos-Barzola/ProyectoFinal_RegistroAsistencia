@@ -1,0 +1,410 @@
+/* ============================================================
+   JUMPER THEME (verde camuflaje + beige del logo)
+   - Fondo negro con degradado suave en TODAS las páginas
+   - Botones verde oscuro + borde verde claro + texto beige
+   - Hover: agranda ligeramente + glow
+   - Títulos/subtítulos en tonos claros del logo
+   - Flash de éxito verde translúcido (auto-hide via JS)
+   ============================================================ */
+
+
+/* ========== 1) Variables del tema (cambia aquí y cambia todo) ========== */
+:root{
+  --bg: #000000;                 /* Fondo base: negro total. */
+  --bgGlow1: rgba(97, 140, 53, .14);  /* Glow verde claro: sube opacidad para más brillo. */
+  --bgGlow2: rgba(53, 79, 34, .12);   /* Glow verde oscuro: da profundidad. */
+
+  --surface: #0f0f0f;            /* Cards: sube para cards más claras. */
+  --surface2: #141414;           /* Alterno: nav/inputs. */
+
+  --text: #EEF393;               /* Texto principal (beige claro del logo). */
+  --muted: #D0DB6F;              /* Texto secundario (beige más suave). */
+
+  --greenDark: #354F22;          /* Verde oscuro del logo: ideal para botones. */
+  --greenMid: #50792F;           /* Verde medio: éxito, badges, detalles. */
+  --greenLight: #618C35;         /* Verde claro: bordes, hover, glow. */
+
+  --border: rgba(238, 243, 147, .14); /* Bordes sutiles con beige: sube para más contraste. */
+  --shadow: 0 14px 40px rgba(0,0,0,.60); /* Sombra general: baja para menos “profundo”. */
+
+  --radius: 16px;                /* Redondeo general. */
+  --radiusSm: 12px;              /* Inputs/botones. */
+}
+
+
+/* ========== 2) Reset básico (evita bugs de layout) ========== */
+*{ box-sizing: border-box; }     /* Evita que padding rompa el ancho. */
+html, body{ height: 100%; }
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+  color: var(--text);            /* Texto principal beige claro. */
+
+  /* Fondo negro con degradado suave global: cambia opacidad para más/menos glow */
+  background:
+    radial-gradient(1200px 600px at 20% 10%, var(--bgGlow1), transparent 65%),
+    radial-gradient(900px 500px at 80% 0%, var(--bgGlow2), transparent 60%),
+    radial-gradient(900px 500px at 50% 90%, rgba(208, 219, 111, .07), transparent 60%),
+    var(--bg);
+}
+
+
+/* ========== 3) Contenedor general ========== */
+.container{
+  max-width: 980px;              /* Ancho máximo en desktop. */
+  margin: 0 auto;                /* Centra. */
+  padding: 20px;                 /* Aire. */
+}
+
+
+/* ========== 4) Links normales (texto) ========== */
+a{
+  color: var(--greenLight);           /* Beige suave para links. */
+  text-decoration: none;
+}
+a:hover{
+  color: var(--muted);            /* Más claro en hover. */
+  text-decoration:none;
+}
+
+
+/* ========== 5) Navbar / Header ========== */
+.nav{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 14px 16px;
+
+  background: rgba(10,10,10,.78); /* Negro transparente. */
+  backdrop-filter: blur(10px);     /* Efecto glass. */
+
+  border-bottom: 1px solid rgba(97,140,53,.35); /* Línea verde clara: sube opacidad para más línea. */
+}
+
+.brand{
+  font-weight: 900;              /* Estilo fuerte tipo marca. */
+  letter-spacing: .8px;          /* “Logo feel”. */
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+
+/* ========== 6) Botones-link (links con forma de botón) ========== */
+.btn,
+.links a,
+a.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  background: var(--greenDark);          /* Botón: verde oscuro del logo. */
+  border: 1px solid var(--greenLight);   /* Borde: verde claro. */
+
+  color: var(--text);                    /* Letras: beige claro. */
+  font-weight: 800;
+  letter-spacing: .2px;
+
+  text-decoration: none;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,.35); /* Sombra del botón. */
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+}
+
+/* Hover: agranda un poquito + glow */
+.btn:hover,
+.links a:hover,
+a.btn:hover{
+  transform: scale(1.04);                 /* Agranda: sube a 1.06 si quieres más efecto. */
+  box-shadow: 0 0 0 3px rgba(97,140,53,.22), 0 16px 40px rgba(0,0,0,.55);
+  background: var(--greenMid);            /* Pasa a verde medio para “encender”. */
+  border-color: var(--muted);             /* Borde beige para más contraste en hover. */
+}
+
+/* Click */
+.btn:active,
+.links a:active,
+a.btn:active{
+  transform: scale(1.01);
+}
+
+
+/* ========== 7) Títulos / Subtítulos ========== */
+h2{
+  margin: 20px 0 24px;
+  font-size: 28px;
+  color: var(--text);                     /* Beige claro. */
+  letter-spacing: .2px;
+  
+}
+h3{
+  margin: 18px 0 10px;
+  color: var(--muted);                      /* Beige suave, queda elegante. */
+}
+
+
+/* ========== 8) Cards (para formularios y bloques) ========== */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border: 1px solid rgba(97,140,53,.30);  /* Borde verde suave: sube opacidad para más borde. */
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+
+/* ========== 9) Badge (Curso: Jumper Kadetes) ========== */
+.badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 12px;
+  border-radius: 999px;
+
+  background: rgba(80,121,47,.20);        /* Verde medio translúcido. */
+  border: 1px solid rgba(97,140,53,.50);  /* Borde verde claro. */
+
+  color: var(--text);
+  font-weight: 900;
+  font-size: 13px;
+}
+
+
+/* ========== 10) Flash / Mensajes (éxito, error, etc.) ========== */
+.flash{
+  margin: 14px 0;
+  padding: 12px 14px;
+
+  border-radius: var(--radiusSm);
+  border: 1px solid rgba(97,140,53,.55);
+  color: var(--text);
+
+  /* Animación suave al aparecer */
+  animation: flashIn .18s ease-out;
+}
+
+/* Éxito: verde del logo, translúcido */
+.flash.success{
+  background: rgba(80,121,47,.28); /* Sube/baja opacidad para más/menos “pintado”. */
+}
+
+/* Error: si en algún punto quieres usarlo */
+.flash.error{
+  background: rgba(185, 28, 28, .22);
+  border-color: rgba(239, 68, 68, .50);
+}
+
+@keyframes flashIn{
+  from{ transform: translateY(-6px); opacity: 0; }
+  to{ transform: translateY(0); opacity: 1; }
+}
+
+
+/* ========== 11) Formularios ========== */
+form{
+  display: grid;
+  gap: 10px;
+  max-width: 620px;
+  margin-top: 12px;
+}
+
+label{
+  font-size: 13px;
+  color: rgba(208,219,111,.85);           /* Label beige suave. */
+  margin-top: 4px;
+}
+
+input, select, textarea{
+  width: 100%;
+  padding: 12px 12px;
+
+  border-radius: var(--radiusSm);
+  border: 1px solid rgba(97,140,53,.35);  /* Borde verde suave. */
+
+  background: rgba(20,20,20,.75);         /* Input oscuro. */
+  color: var(--text);
+
+  outline: none;
+}
+
+input::placeholder, textarea::placeholder{
+  color: rgba(238,243,147,.45);
+}
+
+/* Focus: glow verde */
+input:focus, select:focus, textarea:focus{
+  border-color: rgba(97,140,53,.75);
+  box-shadow: 0 0 0 3px rgba(97,140,53,.22);
+}
+
+
+/* ========== 12) Botón real <button> (mismo estilo que .btn) ========== */
+button{
+  width: fit-content;
+  padding: 10px 14px;
+
+  border-radius: 999px;
+  border: 1px solid var(--greenLight);
+  background: var(--greenDark);
+
+  color: var(--text);
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+}
+
+button:hover{
+  transform: scale(1.04);
+  box-shadow: 0 0 0 3px rgba(97,140,53,.22), 0 16px 40px rgba(0,0,0,.55);
+  background: var(--greenMid);
+  border-color: var(--muted);
+}
+
+button:active{ transform: scale(1.01); }
+
+
+/* ========== 13) Tablas (asistencia) ========== */
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+
+  border-radius: var(--radius);
+  overflow: hidden;
+
+  border: 1px solid rgba(97,140,53,.30);
+  background: rgba(255,255,255,.02);
+}
+
+th, td{
+  padding: 12px;
+  border-bottom: 1px solid rgba(97,140,53,.18);
+  text-align: left;
+}
+
+th{
+  font-size: 13px;
+  color: rgba(208,219,111,.95);
+  background: rgba(80,121,47,.12);
+}
+
+tr:hover td{
+  background: rgba(80,121,47,.10);
+}
+
+
+/* ========== 14) Checkbox (verde camuflaje) ========== */
+input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  accent-color: var(--greenMid); /* Cambia a greenLight si quieres más brillo. */
+}
+
+
+/* ========== 15) Separadores ========== */
+hr{
+  border: none;
+  border-top: 1px solid rgba(97,140,53,.25);
+  margin: 18px 0;
+}
+
+
+/* ========== 16) Responsive (móvil) ========== */
+@media (max-width: 520px){
+  h2{ font-size: 22px; }
+  .container{ padding: 14px; }
+  button{ width: 100%; }
+}
+
+
+.brand{
+  display: inline-flex;       /* alinea logo + texto */
+  align-items: center;
+  gap: 10px;                  /* espacio entre logo y texto */
+}
+
+.brand-logo{
+  height: 3rem;                /* mismo tamaño que la letra */
+  width: auto;
+  display: block;
+}
+
+
+/* ==========================================
+   LOGIN: logo como marca de agua (solo aquí)
+   Responsive + degradado suave
+   ========================================== */
+
+.auth-page{
+  position: relative;                 /* necesario para el pseudo-elemento */
+  min-height: calc(100vh - 70px);     /* ocupa casi toda la pantalla (70px ~ nav) */
+  display: grid;
+  place-items: center;                /* centra el login */
+  padding: 24px;
+}
+
+/* La tarjeta del login encima del logo */
+.auth-card{
+  position: relative;
+  z-index: 1;                         /* encima del logo */
+  width: min(520px, 100%);            /* responsive: máximo 520px */
+}
+
+/* Fondo con logo centrado + fade */
+.auth-page::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  /* Logo centrado */
+  background-image: url("../img/jumper-logo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+
+  /* Responsive: se ajusta a pantalla */
+  background-size: min(520px, 75vw);  /* cambia 520px si lo quieres más grande */
+
+  opacity: .12;                       /* visibilidad del logo (sube a .16 si quieres más) */
+
+  /* Degradado / “desvanecido” hacia bordes */
+  -webkit-mask-image: radial-gradient(circle at center,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,.95) 40%,
+    rgba(0,0,0,.35) 72%,
+    rgba(0,0,0,0) 100%
+  );
+  mask-image: radial-gradient(circle at center,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,.95) 40%,
+    rgba(0,0,0,.35) 72%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+/* Ajuste extra en pantallas pequeñas */
+@media (max-width: 520px){
+  .auth-page{ padding: 16px; }
+  .auth-page::before{
+    background-size: min(420px, 85vw); /* logo un poco más grande en móviles */
+    opacity: .10;                      /* más suave para no tapar el form */
+  }
+}
+
+/* Login: form más compacto */
+.auth-card form{
+  max-width: 100%;
+}

@@ -1,0 +1,14 @@
+# --- Sistema / Editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- PHP / Composer (si algún día usas) ---
+vendor/
+
+# --- Logs / temporales ---
+*.log
+
+# --- Archivos locales de configuración (si tuvieras) ---
+.env
