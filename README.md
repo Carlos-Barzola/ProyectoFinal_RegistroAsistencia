@@ -26,11 +26,17 @@ El proyecto sigue una arquitectura tipo **MVC (Modelo - Vista - Controlador)** y
 
 
 Usuario
+
 ↓
+
 Frontend (Netlify)
+
 ↓
+
 Backend PHP (Render)
+
 ↓
+
 Base de Datos MySQL (Aiven - nube)
 
 ---
