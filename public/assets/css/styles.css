@@ -574,3 +574,131 @@ select, input, textarea{
     font-size: 15px;
   }
 }
+
+/* ============================================================
+   NAV + BOTONES: responsive real (móvil/tablet)
+   - evita que Dashboard/Cerrar sesión se monten
+   - arregla botones de dashboards y páginas derivadas
+   ============================================================ */
+
+/* 1) La barra superior permite 2 filas sin romperse */
+.nav{
+  flex-wrap: wrap;                 /* permite salto de línea */
+  align-items: center;
+}
+
+/* 2) Zona de botones del header */
+.links{
+  display: flex;                   /* pone botones en fila */
+  gap: 10px;                       /* espacio entre botones */
+  flex-wrap: wrap;                 /* si no caben, bajan ordenados */
+  justify-content: flex-end;       /* se pegan a la derecha */
+  align-items: center;
+}
+
+/* 3) Botones del header: que no sean gigantes en móvil */
+.links a{
+  width: auto;                     /* evita que se vuelvan 100% por otras reglas */
+  padding: 10px 14px;              /* tamaño cómodo */
+  white-space: nowrap;             /* evita que “Cerrar sesión” se parta en 2 líneas */
+}
+
+/* 4) En móviles: header en 2 columnas (marca arriba, botones abajo) */
+@media (max-width: 640px){
+  .nav{
+    gap: 10px;
+  }
+
+  .brand{
+    width: 100%;                   /* marca ocupa toda la fila */
+  }
+
+  .links{
+    width: 100%;                   /* botones ocupan toda la fila */
+    justify-content: flex-start;   /* quedan a la izquierda (más natural en móvil) */
+  }
+
+  .links a{
+    flex: 1;                       /* ambos botones reparten espacio */
+    min-width: 140px;              /* evita que se vuelvan demasiado pequeños */
+    text-align: center;
+  }
+}
+
+/* 5) Botones "grupales" (como los 3 del dashboard) */
+.btn-group{
+  display: flex;
+  flex-wrap: wrap;                /* permite varias filas */
+  gap: 12px;
+}
+
+/* Cada botón del grupo se adapta sin montarse */
+.btn-group .btn,
+.btn-group a,
+.btn-group button{
+  flex: 1 1 180px;                /* crece, se encoge, base 180px */
+  text-align: center;
+}
+
+/* En móvil: botones del grupo apilados y full width */
+@media (max-width: 520px){
+  .btn-group .btn,
+  .btn-group a,
+  .btn-group button{
+    flex: 1 1 100%;
+  }
+}
+
+
+/* ============================================================
+   DASHBOARDS (.grid): responsive para móvil / tablet / desktop
+   - No cambia colores, solo layout
+   ============================================================ */
+
+.grid{
+  display: grid;                                /* convierte a grid real */
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* admin: 3 columnas en desktop */
+  gap: 14px;                                    /* separación entre cards */
+  margin-top: 14px;                             /* aire entre título y botones */
+}
+
+/* Los links dentro del dashboard deben verse como botones */
+.grid .card{
+  display: flex;                /* centra el texto */
+  align-items: center;
+  justify-content: center;
+
+  min-height: 58px;             /* altura consistente (táctil) */
+  text-align: center;
+  font-weight: 900;
+
+  padding: 14px;                /* aire interno */
+  border-radius: var(--radius); /* respeta tu estilo */
+
+  /* mantiene tu estilo de card sin cambiar tema */
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.grid .card:hover{
+  transform: scale(1.02);
+}
+
+/* ===== Tablets (iPad, etc.): 2 columnas ===== */
+@media (max-width: 1024px){
+  .grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ===== Celular: 1 columna full width ===== */
+@media (max-width: 520px){
+  .grid{
+    grid-template-columns: 1fr;
+  }
+
+  .grid .card{
+    width: 100%;
+    min-height: 56px;
+  }
+}
