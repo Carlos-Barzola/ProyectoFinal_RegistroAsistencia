@@ -408,3 +408,169 @@ hr{
 .auth-card form{
   max-width: 100%;
 }
+
+/*HACER RESPOSIVE*/
+/* ============================================================
+   17) RESPONSIVE COMPLETO (móvil / tablet / iPad / desktop)
+   - Pegar al FINAL del CSS
+   - No cambia tema, solo adapta layout
+   ============================================================ */
+
+/* 17.1) Evita scroll horizontal por elementos anchos */
+html, body{
+  overflow-x: hidden; /* evita que tablas/cards generen scroll lateral */
+}
+
+/* 17.2) Tipografía y separación más fluidas (se adapta a pantalla) */
+h2{
+  font-size: clamp(20px, 2.6vw, 28px); /* mínimo 20px, máximo 28px */
+  margin: 16px 0 18px;                /* menos aire en móvil, mantiene en desktop */
+}
+
+h3{
+  font-size: clamp(16px, 2.1vw, 20px);
+}
+
+/* 17.3) Contenedor: padding adaptable por breakpoint */
+.container{
+  padding: clamp(12px, 2.5vw, 20px);  /* se hace más estrecho en móvil */
+}
+
+/* 17.4) Navbar: que no se “rompa” en pantallas pequeñas */
+.nav{
+  flex-wrap: wrap; /* permite que baje a otra línea si no cabe */
+}
+
+/* 17.5) Grupo de botones/links dentro del header (si usas .links) */
+.links{
+  display: flex;
+  flex-wrap: wrap;       /* permite varias filas */
+  gap: 10px;             /* separación consistente */
+  justify-content: flex-end;
+}
+
+/* 17.6) Botones en móvil: full width solo cuando corresponde */
+@media (max-width: 640px){
+  .btn,
+  .links a,
+  a.btn,
+  button{
+    width: 100%;          /* botones ocupan toda la fila */
+  }
+}
+
+/* 17.7) Formularios: que siempre quepan (inputs y labels) */
+form{
+  width: 100%;            /* ocupa el ancho disponible */
+  max-width: 100%;        /* quita el límite fijo en pantallas pequeñas */
+}
+
+/* 17.8) Cards y secciones: padding un poco menor en móvil */
+@media (max-width: 520px){
+  .card{
+    padding: 14px;        /* más compacto */
+  }
+}
+
+/* 17.9) Tablas RESPONSIVE: scroll horizontal elegante (asistencia) */
+.table-wrap{
+  width: 100%;
+  overflow-x: auto;                /* habilita scroll solo en la tabla */
+  -webkit-overflow-scrolling: touch; /* scroll suave en iOS */
+  border-radius: var(--radius);    /* mantiene estética */
+  border: 1px solid rgba(97,140,53,.30);
+}
+
+.table-wrap table{
+  min-width: 680px; /* evita que se rompa en móvil: se hace scroll */
+}
+
+/* 17.10) Si NO tienes .table-wrap en HTML, al menos que table no rompa */
+table{
+  display: block;         /* permite overflow si algún contenedor lo aplica */
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* 17.11) Campos select (combos) más cómodos en móvil */
+select, input, textarea{
+  font-size: 16px; /* evita zoom automático en iPhone al enfocar inputs */
+}
+
+/* 17.12) Login: que el form nunca se salga */
+.auth-card{
+  width: 100%;
+  max-width: 520px;
+}
+
+/* 17.13) Ajuste del logo en el brand (navbar) por tamaño de pantalla */
+.brand-logo{
+  height: clamp(28px, 3.2vw, 48px); /* crece un poco en desktop y baja en móvil */
+}
+
+/* 17.14) iPad / tablets (modo retrato): mejor spacing y layout */
+@media (min-width: 768px) and (max-width: 1024px){
+  .container{
+    max-width: 920px;     /* aprovecha tablet sin verse gigante */
+  }
+  .card{
+    padding: 18px;
+  }
+}
+
+/* 17.15) Desktop grande: contenido un poco más “aireado” sin cambiar tu diseño */
+@media (min-width: 1200px){
+  .container{
+    max-width: 1040px; /* un poco más ancho que 980px */
+  }
+}
+
+/* ====== Responsive específico para el grid de Asistencia ====== */
+.asistencia-grid{
+  grid-template-columns: 1fr 1fr auto; /* desktop: 2 campos + botón */
+}
+
+/* móvil: todo a 1 columna */
+@media (max-width: 640px){
+  .asistencia-grid{
+    grid-template-columns: 1fr;  /* Curso, Fecha, Botón uno debajo del otro */
+  }
+}
+
+/* ============================================================
+   Mejoras UX móvil para tabla de asistencia CHECKBOX
+   ============================================================ */
+
+/* Centrar la columna del checkbox */
+.table-wrap td:last-child,
+.table-wrap th:last-child{
+  text-align: center;
+}
+
+/* Hacer el checkbox más cómodo para tocar */
+.table-wrap input[type="checkbox"]{
+  width: 22px;      /* más grande */
+  height: 22px;
+  cursor: pointer;
+}
+
+/* Aumentar espacio vertical en móvil */
+@media (max-width: 640px){
+
+  .table-wrap table{
+    min-width: 520px; /* menos ancho mínimo para que no se vea exagerado */
+  }
+
+  .table-wrap td{
+    padding: 16px 12px; /* más espacio táctil */
+  }
+
+  .table-wrap th{
+    padding: 14px 12px;
+  }
+
+  /* Texto ligeramente más grande en móvil */
+  .table-wrap td{
+    font-size: 15px;
+  }
+}
