@@ -12,7 +12,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <title><?= defined('APP_NAME') ? APP_NAME : 'Jumper Asistencia' ?></title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./assets/css/styles.css?v=1">
+  <link rel="stylesheet" href="/css/styles.css?v=<?= time(); ?>">
 </head>
 <body>
 
